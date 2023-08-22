@@ -2,6 +2,7 @@ import cloudinary from "cloudinary";
 import { CloudinaryImage } from "../gallery/cloudinary-image";
 import { SearchResult } from "../gallery/page";
 import { ForceRefresh } from "@/components/force-refresh";
+import FavoritesList from "./favorites-list";
 
 
 
@@ -22,17 +23,9 @@ export default async function GalleryPage() {
                     <h1 className="text-4xl font-bold">Favorite Images</h1>
                 </div>
 
-                <div className="grid grid-cols-4 gap-4">
-                    {results.resources.map((result) =>
-                        <CloudinaryImage
-                            path="/gallery"
-                            key={result.public_id}
-                            imageData={result}
-                            width="400"
-                            height="300"
-                            alt="an image of something" />
-                    )}
-                </div>
+                <FavoritesList
+                    initialResources={results.resources} />
+
             </div>
         </section>
     );
