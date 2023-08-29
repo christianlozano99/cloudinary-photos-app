@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { CloudinaryImage } from "../gallery/cloudinary-image";
 import { SearchResult } from "../gallery/page";
+import { ImageGrid } from "@/components/image-grid";
+import { Result } from "postcss";
 
 export default function FavoritesList({ initialResources }: { initialResources: SearchResult[] }) {
 
@@ -13,11 +15,13 @@ export default function FavoritesList({ initialResources }: { initialResources: 
     }, [initialResources]);
 
     return (
-        <div className="grid grid-cols-4 gap-4">
-            {resources.map((result) => (
-                <CloudinaryImage
-                    key={result.public_id}
-                    imageData={result}
+
+        <ImageGrid
+            images={resources}
+            getImage={(imageData: SearchResult) => {
+                return (<CloudinaryImage
+                    key={imageData.public_id}
+                    imageData={imageData}
                     width="400"
                     height="300"
                     alt="an image of something"
@@ -28,9 +32,9 @@ export default function FavoritesList({ initialResources }: { initialResources: 
                             })
                         })
                     }}
-                />
-            ))}
-        </div>
+                />);
+            }}
+        />
 
     );
 }
